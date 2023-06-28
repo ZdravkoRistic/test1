@@ -6,6 +6,8 @@ import Card from '../../components/Card/Card';
 import { useSearchParams } from 'react-router-dom';
 import Pagination from '../../components/Pagination/Pagination';
 import LoadingAnim from '../../components/LoadingAnim/LoadingAnim';
+import SearchPost from '../../components/SearchPost/SearchPost';
+import CreatePost from '../../components/CreatePost/CreatePost';
 
 function Posts() {
 	const [isLoading, setIsLoading] = useState(true);
@@ -14,9 +16,8 @@ function Posts() {
 
 	const dispatch = useDispatch();
 
-	const { posts, removePost, addRemoveLike } = useSelector(
-		(state) => state.postsStore
-	);
+	const { posts, removePost, addRemoveLike, createPostNew } =
+		useSelector((state) => state.postsStore);
 
 	useEffect(() => {
 		let page = searchParams.get('page')
@@ -30,10 +31,10 @@ function Posts() {
 			dispatch(storeAllPosts(res.data));
 			setIsLoading(false);
 		});
-	}, [removePost, addRemoveLike, searchParams]);
+	}, [removePost, addRemoveLike, searchParams, createPostNew]);
 
 	return (
-		<div className='flex mt-[30px]'>
+		<div className='flex mt-[30px] gap-5'>
 			<div className='w-[70%]'>
 				{isLoading ? (
 					<LoadingAnim />
@@ -48,7 +49,10 @@ function Posts() {
 					</>
 				)}
 			</div>
-			<div className='w-[30%]'>sidebar</div>
+			<div className='w-[30%]'>
+				<SearchPost />
+				<CreatePost />
+			</div>
 		</div>
 	);
 }
