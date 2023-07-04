@@ -11,7 +11,7 @@ import { restoreUser } from './store/userSlice';
 // if (process.env.NODE_ENV === 'development') {
 // 	axios.defaults.baseURL = 'http://localhost:4000/api';
 // } else {
-// axios.defaults.baseURL = 'https://selectit-social.vercel.app/api';
+ axios.defaults.baseURL = 'https://socialapp-backend.vercel.app/api';
 // }
 
 axios.interceptors.request.use((config) => {
